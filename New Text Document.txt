@@ -14,3 +14,73 @@ df2.to_sql('table2', conn, if_exists='replace', index=False)
 
 # Close the connection to the database
 conn.close()
+
+
+
+These definitions are based on common terms used in pharmaceutical sales and CRM (Customer Relationship Management) systems:
+
+pk_mdm_key: Primary key or unique identifier used in the Master Data Management (MDM) system to uniquely identify records.
+
+customer_territory_name: Name or identifier of the geographic or organizational territory assigned to a customer.
+
+customer_target: The sales or engagement target set for a customer or a group of customers.
+
+emp_name: Name of the employee, typically referring to the sales representative or account manager.
+
+emp_department: Department within the organization to which the employee belongs.
+
+customer_bu: Customer's business unit, referring to the specific division or sector of the customer's organization.
+
+customer_franchise: The franchise or product line that the customer is associated with within the pharmaceutical company's offerings.
+
+customer_bu_code: A unique code or identifier for the customer's business unit.
+
+customer_franchise_code: A unique code or identifier for the customer's franchise.
+
+int_channel: The channel through which an interaction with a customer was conducted (e.g., phone, email, face-to-face).
+
+int_type: Type of interaction (e.g., sales call, service request, feedback).
+
+int_subtype: More specific categorization of the interaction type (e.g., initial contact, follow-up, complaint).
+
+taxonomy_key: A categorization key that helps in classifying the interaction based on predefined taxonomy (e.g., product inquiry, service issue).
+
+int_title: Title or subject of the interaction.
+
+event_participant_role: Role of the participant in the interaction (e.g., decision-maker, influencer, user).
+
+contact_mdm_id: Unique identifier for the contact in the Master Data Management system.
+
+case_prod_key: Key or identifier linking the interaction or case to a specific product.
+
+key_description: Description associated with the case_prod_key, providing details about the product or case.
+
+cases_date: Date of the interaction or case creation.
+
+int_rejection: Indicator or details regarding whether the interaction was rejected by the customer.
+
+int_acceptation: Indicator or details regarding whether the interaction was accepted by the customer.
+
+int_reaction: Customer's reaction or response to the interaction.
+
+total_opens: Total number of times the customer opened an email or document related to the interaction.
+
+total_actions: Total actions taken by the customer as a result of the interaction.
+
+planned_call_flag: Indicator whether the interaction was a planned call or meeting.
+
+ean: European Article Number, which might be used here as a unique identifier for products.
+
+units: Quantity of products discussed or sold during the interaction.
+
+sales: Revenue or sales amount associated with the interaction or transaction.
+
+sales_channel: The sales channel through which the product was sold or the interaction occurred (e.g., direct, online, distributor).
+
+country_code: Country code representing the geographical location associated with the interaction or sales transaction.
+
+brand_name: Name of the product brand involved in the interaction or sales.
+
+mdm_key: Another unique identifier used within the Master Data Management system, possibly linking different tables or records.
+
+customernameh2: Possibly a secondary customer name or an alternative identifier for the customer.
