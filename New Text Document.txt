@@ -79,6 +79,8 @@ sales_channel: The sales channel through which the product was sold or the inter
 
 country_code: Country code representing the geographical location associated with the interaction or sales transaction.
 
+https://medium.com/@c.giancaterino/langchain-openai-in-action-with-different-data-sources-e089ca43c90a
+
 brand_name: Name of the product brand involved in the interaction or sales.
 
 mdm_key: Another unique identifier used within the Master Data Management system, possibly linking different tables or records.
