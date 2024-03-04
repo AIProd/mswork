@@ -86,3 +86,28 @@ brand_name: Name of the product brand involved in the interaction or sales.
 mdm_key: Another unique identifier used within the Master Data Management system, possibly linking different tables or records.
 
 customernameh2: Possibly a secondary customer name or an alternative identifier for the customer.
+
+
+
+
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import TextLoader
+from langchain_openai import OpenAIEmbeddings
+from langchain.text_splitters import CharacterTextSplitter
+
+# This function replaces CVStoVectorStoreIndex
+def CSVtoFAISSIndex(dataframe):
+    # Convert DataFrame to a list of documents (assuming each row is a document)
+    documents = dataframe.to_dict('records')  # Convert each row to a dictionary
+
+    # Initialize OpenAI embeddings (ensure your OPENAI_API_KEY is set)
+    embeddings = OpenAIEmbeddings()
+
+    # Split documents into chunks if they are too large (optional, adjust based on your needs)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    docs = text_splitter.split_documents(documents)
+
+    # Create FAISS index from documents
+    vectorstore = FAISS.from_documents(docs, embeddings)
+
+    return vectorstore
