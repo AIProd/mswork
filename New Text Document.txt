@@ -1,3 +1,5 @@
+https://docs.google.com/presentation/d/1o0NVoEDpvN-BuLCXRrBnWt5W3DYw3SVw/edit?usp=sharing&ouid=115761606175286406693&rtpof=true&sd=true
+
 import pandas as pd
 import sqlite3
 
