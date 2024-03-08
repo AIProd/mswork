@@ -128,3 +128,35 @@ def main():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         level=logging.DEBUG
     )
+
+# Initialize variables for email content
+email_subject = f"Summary of Insights for {role} in {industry}"
+email_body_intro = f"""
+Hi Team,
+
+Please find below the summary of insights we've gathered based on the recent analysis for the role of {role} in the {industry} industry.
+
+"""
+
+# Start with the introduction for the email body content
+email_body_content = email_body_intro
+
+# Loop through each question and answer
+for i, k in enumerate(list_from_string):
+    # Assuming this method synchronously returns the answer as a string
+    answer = gpt4_agent.run(k)  
+    # Print question and answer in the Streamlit app
+    st.markdown(
+        f"<div class='slack-container'><div class='slack-question'>Question {i + 1}: {k}</div><div class='slack-answer'>{answer}</div></div>",
+        unsafe_allow_html=True,
+    )
+    # Append question and answer to the email body content
+    email_body_content += f"Question {i + 1}: {k}\nAnswer: {answer}\n\n"
+
+# Wrap up the email with a closing
+email_body_content += "Best regards,\n[Your Name]\n"
+
+# Display the email format in the app
+st.subheader("Email Format Summary")
+st.text_area("Email Subject", email_subject, height=50)
+st.text_area("Email Body", email_body_content, height=400)
