@@ -1,3 +1,21 @@
+Introduction: 
+This video is about Bernhard Runker, who began to struggle with severe pain in his shoulders, chest, arms, and hands five years ago. Tests at the University Clinic in Basel led to a diagnosis of Hepatitis E, a form of hepatitis that is transmitted from animals to humans. 
+
+Main Ideas:
+
+- Hepatitis E is a form of hepatitis, an inflammation of the liver, which is transmitted from animals to humans. It is different from other types of hepatitis in this regard.
+- Most people with Hepatitis E notice nothing, while some, like Bernhard, suffer from severe pain and discomfort.
+- Hepatitis E can be transmitted through contaminated water and meat products. It is particularly important to thoroughly cook meat in order to inactivate the virus.
+- Bernhard received strong medications and cortisone for the pain. He also began physio and occupational therapy to stimulate the nerves in the affected body parts.
+- After several months of treatment, the feeling returned to his fingers and he was able to use his hand normally again.
+- It is still unclear how Bernhard contracted the virus. To avoid a recurrence, he is now very careful about what he eats.
+
+Conclusion:
+Although Hepatitis E is not very common in Switzerland, it's important to know how the virus is transmitted in order to protect oneself. This includes thoroughly cooking meat and practicing proper hygiene. Individuals who experience severe pain or other symptoms should seek medical attention immediately. 
+
+Title: Bernhard's Battle Against Hepatitis E: A Path to Recovery
+
+
 https://docs.google.com/presentation/d/1o0NVoEDpvN-BuLCXRrBnWt5W3DYw3SVw/edit?usp=sharing&ouid=115761606175286406693&rtpof=true&sd=true
 
 import pandas as pd
