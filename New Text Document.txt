@@ -1,3 +1,6 @@
+https://blog.langchain.dev/benchmarking-question-answering-over-csv-data/
+https://www.youtube.com/watch?v=jGnf4OhptbA
+
 20-Day Plan for GENAI LangChain-based Product Development
 Day 1: Define project scope and objectives for the GENAI LangChain-based solution.
 Day 2: Identify and document specific use cases and requirements for target user roles.
