@@ -1,3 +1,36 @@
+system_prompt = 'I want you to act as a professional in making good summaries from youtube videos!'
+prompt = f'''Break the text to be processed into chunks if needed in interest of tokens and process
+Summarize the following text in {language_code}.
+    Text: {texts}
+
+    Add a title to the summary in {language_code}.
+    Include an INTRODUCTION, BULLET POINTS if possible, and a CONCLUSION in {language_code}.'''
+
+
+    # Start summarizing using OpenAI
+response = openai.chat.completions.create(
+        model=model_name,
+        messages=[
+            {'role': 'system', 'content': system_prompt},
+            {'role': 'user', 'content': prompt}
+        ],
+        temperature=1
+    )
+prompt1 = f'''Share the {response.choices[0].message.content} in english'''
+response1 = openai.chat.completions.create(
+        model=model_name,
+        messages=[
+            {'role': 'user', 'content': prompt1}
+        ],
+        temperature=1
+    )
+print(response1.choices[0].message.content)
+
+
+
+
+
+
 https://python.langchain.com/docs/guides/evaluation/
 
 https://langfuse.com/guides/cookbook/integration_azure_openai_langchain
