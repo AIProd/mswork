@@ -1,3 +1,5 @@
+https://langfuse.com/guides/cookbook/integration_azure_openai_langchain
+
 https://blog.langchain.dev/benchmarking-question-answering-over-csv-data/
 https://www.youtube.com/watch?v=jGnf4OhptbA
 
