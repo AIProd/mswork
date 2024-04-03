@@ -1,3 +1,76 @@
+import ipywidgets as widgets
+from IPython.display import display, clear_output
+
+# Placeholder function for analysis
+# You should replace the contents of this function with the actual analysis code
+def perform_analysis(prompt):
+    # Here you would have the code that performs the analysis
+    # This could involve sending the prompt to an external API or running a local analysis
+    print("Analyzing with prompt:")
+    print(prompt)
+    # Imagine analysis happens here, and we print "Analysis Complete" when done
+    print("Analysis Complete\n\n")
+
+# Generate the report based on the role and the employee name
+def generate_report(role, employee_name=''):
+    if role == 'Sales Manager':
+        prompt = """
+        Please analyze the attached CSV file containing sales data and provide a detailed report that includes:
+        1. Overall sales performance by each employee, highlighting top performers.
+        2. Trends over the past year, identifying seasonal patterns or notable fluctuations.
+        3. Customer sales performance, focusing on growth, churn, and opportunities for upselling.
+        4. Correlations between sales activities and performance outcomes.
+        Provide charts and graphs for visual data representation where applicable.
+        """
+    else:
+        prompt = f"""
+        Please analyze the attached CSV file focusing on the sales data for the employee named '{employee_name}'. 
+        Provide a report that includes:
+        1. A summary of my sales performance with my assigned customers.
+        2. Trends and forecasted performance over the next quarter.
+        3. My top three customers in terms of sales growth.
+        4. Recommendations for sales strategies to improve performance.
+        Ensure the report is personalized and actionable.
+        """
+
+    # Run the analysis
+    perform_analysis(prompt)
+
+# Widgets for user input
+role_dropdown = widgets.Dropdown(
+    options=['Employee', 'Sales Manager'],
+    value='Sales Manager',
+    description='Role:',
+)
+
+employee_name_text = widgets.Text(
+    value='',
+    description='Name:',
+)
+
+generate_button = widgets.Button(
+    description='Generate Report',
+    button_style='success',
+)
+
+output_area = widgets.Output()
+
+# Event to handle button click
+def on_generate_button_clicked(b):
+    role = role_dropdown.value
+    employee_name = employee_name_text.value
+    with output_area:
+        clear_output()
+        if role == 'Employee' and not employee_name:
+            print("Please enter the employee name.")
+        else:
+            generate_report(role, employee_name)
+
+# Attach the event handler to the button
+generate_button.on_click(on_generate_button_clicked)
+
+# Display the UI components
+display(role_dropdown, employee_name_text, generate_button, output_area)
 
 
 To get advanced analysis insights for the customers with respect to the sales metrics from the given CSV file, you would want to consider a prompt that specifically asks for the kind of analysis you're interested in. Here's a prompt that could work for the LangChain CSV agent:
