@@ -1,3 +1,24 @@
+
+
+To get advanced analysis insights for the customers with respect to the sales metrics from the given CSV file, you would want to consider a prompt that specifically asks for the kind of analysis you're interested in. Here's a prompt that could work for the LangChain CSV agent:
+
+"Given a CSV file with the following headers: customer name, sales for December 2023, sales for the previous year, rolling quarter sales, rolling quarter sales for the previous year, year-to-date sales change percentage, and moving annual total sales change percentage:
+
+Calculate the year-over-year growth rate for December sales.
+Identify the top 5 customers with the highest sales in December 2023.
+Compare the rolling quarter sales to the previous year's rolling quarter sales and highlight significant trends or changes.
+Analyze the year-to-date sales change percentage to identify any seasonal patterns or anomalies.
+Evaluate the moving annual total sales change percentage for insights into long-term customer value and loyalty.
+Provide visualizations such as line graphs or bar charts that represent the sales trends and comparisons over time.
+Suggest strategic recommendations for the customers with declining sales and opportunities for upselling to those with growing sales.
+Please output the analysis in a summarized report format that includes the calculations, visual representations, and strategic insights."
+
+
+
+
+
+
+
 system_prompt = 'I want you to act as a professional in making good summaries from youtube videos!'
 prompt = f'''Break the text to be processed into chunks if needed in interest of tokens and process
 Summarize the following text in {language_code}.
