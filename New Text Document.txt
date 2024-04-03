@@ -1,3 +1,28 @@
+def create_employee_prompt(employee_name):
+    return f"""
+    Analyze sales performance using the dataset with columns emp_name, customernameh2, sales_dec2023, 
+    PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP, 
+    focusing on the data related to the employee named '{employee_name}'. Create a report that includes:
+    
+    1. An overview of sales performance with an emphasis on sales_dec2023 and YTD, highlighting successes 
+       and areas for customer engagement improvement.
+    2. An analysis of PreviousYearChange for each managed customer, identifying significant growth or decline.
+    3. A review of RollingQuarter and RollingQuarterPreviousYearChange data to uncover quarterly trends 
+       or anomalies in the sales territory.
+    4. Insights into long-term sales trajectory and customer loyalty, considering MAT and MATChangeP.
+    5. Recommendations for strategies to improve sales with underperforming customers and maintain/enhance 
+       sales with top-performing customers.
+       
+    Please ensure the insights are concise, providing clear guidance for future sales strategies.
+    """
+
+
+
+
+
+
+
+
 SM
 Please analyze the provided sales data with the following headers: emp_name, customernameh2, sales_dec2023, PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP. Generate a comprehensive report that includes:
 
