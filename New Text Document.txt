@@ -1,3 +1,27 @@
+SR
+Conduct a targeted analysis of my sales performance using the dataset containing columns for employee name, customer name, sales for December 2023, sales for the previous year, rolling quarter sales, previous year change, rolling quarter previous year change, YTD, YTD change percentage, MAT, and MAT change percentage. Generate a report that covers:
+
+1. My total sales in December 2023 and a comparison to the previous year’s sales figures.
+2. Identify my top three customers in terms of sales growth from December 2022 to December 2023.
+3. Assess the trends in my rolling quarter sales compared to the same quarter in the previous year, highlighting any substantial increases or decreases.
+4. Calculate my YTD sales and the change percentage, discussing how this aligns with my annual sales targets.
+5. Analyze my MAT sales figures to understand my performance stability over time.
+6. Based on the analysis, provide recommendations for improving my sales with specific customers and strategies for potentially expanding my customer base.
+
+
+SM
+Analyze the sales dataset with columns for employee name, customer name, sales for December 2023, sales for the previous year, rolling quarter sales, previous year change, rolling quarter previous year change, YTD, YTD change percentage, MAT, and MAT change percentage. Provide a comprehensive report that includes the following analyses:
+
+1. Summarize total sales in December 2023 for each employee, identifying the highest and lowest performers.
+2. Determine the year-over-year growth in sales by comparing December 2023 figures to the previous year's sales, providing a ranked list of customers by the percentage increase.
+3. Examine rolling quarter sales and the percentage change from the previous year for each customer, highlighting any that show significant variances.
+4. Analyze the Year-To-Date (YTD) sales figures and the YTD change percentage to pinpoint trends and project the potential end-of-year outcomes.
+5. Evaluate the Moving Annual Total (MAT) sales and the percentage change for insight into long-term trends.
+6. Offer strategic insights based on the sales data, suggesting focus areas for the next quarter and potential risk mitigation for underperforming areas.
+
+
+
+
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 
