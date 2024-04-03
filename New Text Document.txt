@@ -1,3 +1,31 @@
+SM
+Please analyze the provided sales data with the following headers: emp_name, customernameh2, sales_dec2023, PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP. Generate a comprehensive report that includes:
+
+1. A summary of sales performance for each employee. Identify top performers based on YTD sales and note any concerning trends in MATChangeP.
+2. Assess overall sales trends, focusing on YTDChangeP and MATChangeP, to identify any potential seasonal impacts or market shifts.
+3. Evaluate customer sales performance. For customers with a sales_dec2023 greater than the average, discuss growth potential. For those below, provide strategies to improve sales.
+4. Examine the PreviousYearChange and RollingQuarterPreviousYearChange metrics to pinpoint any significant deviations and what they might suggest about market dynamics.
+5. Present this analysis with actionable insights, noting areas of success and recommending targeted strategies for areas that show a decline or slower growth. Include visual representations such as graphs or charts where possible for easier comprehension.
+
+
+SR
+Analyze my sales performance using the data provided with columns: emp_name, customernameh2, sales_dec2023, PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP. Focus on my customers and sales figures, and create a report that includes:
+
+1. An overview of my sales performance, using sales_dec2023 and YTD to highlight my successes and customers that may need more attention.
+2. Analyze the change in sales from the previous year (PreviousYearChange) for each customer I manage, identifying those with significant growth or decline.
+3. Review the RollingQuarter and RollingQuarterPreviousYearChange data to determine if there are any quarterly trends or anomalies specific to my sales territory.
+4. Discuss my performance in the context of MAT and MATChangeP, providing insight into the long-term sales trajectory and customer loyalty.
+5. Offer recommendations for improving sales with underperforming customers and strategies to maintain or enhance sales with top-performing customers.
+Please ensure the insights are concise and provide clear guidance for sales strategies moving forward.
+
+
+
+
+
+
+
+
+
 SR
 Conduct a targeted analysis of my sales performance using the dataset containing columns for employee name, customer name, sales for December 2023, sales for the previous year, rolling quarter sales, previous year change, rolling quarter previous year change, YTD, YTD change percentage, MAT, and MAT change percentage. Generate a report that covers:
 
