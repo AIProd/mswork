@@ -1,3 +1,30 @@
+Analyze the provided sales data with columns: emp_name, customernameh2, sales_dec2023, previous_month_change, PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP. Construct a 500-word report detailing:
+
+1. A ranked summary of each employee's sales performance, focusing on changes observed in previous_month_change, YTD, and MATChangeP, specifically highlighting any significant shifts or anomalies.
+2. A trend analysis of sales_dec2023 against previous_month_change, illustrating any patterns, and comparing these trends to the PreviousYearChange and RollingQuarter metrics.
+3. A review of customer sales performance, indicating which customers have shown the most significant changes in sales_dec2023 and previous_month_change, along with a discussion on the stability or volatility in their purchasing patterns.
+4. An exploration of the data to reveal any potential correlations between RollingQuarter and RollingQuarterPreviousYearChange across different customer segments.
+Please ensure that the report includes factual insights derived from the data, emphasizing notable findings, and refrains from making unfounded predictions or recommendations.
+
+
+
+Using the sales data columns: emp_name, customernameh2, sales_dec2023, previous_month_change, PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP, analyze the sales performance for the employee named '{employee_name}'. Prepare a 500-word report that provides:
+
+1. An in-depth review of the employee's sales figures, particularly focusing on sales_dec2023 and previous_month_change, highlighting any major increases or decreases.
+2. A comparative analysis of the employee's current YTD sales figures with the previous year's performance, using PreviousYearChange as a key indicator.
+3. An assessment of the monthly and quarterly sales progression for the employee's customer portfolio, utilizing the RollingQuarter and previous_month_change to identify any trends.
+4. An overview of the long-term sales pattern reflected by MAT and MATChangeP, discussing consistency and identifying any outlier months or quarters.
+This report should be grounded in the data provided, accentuating noteworthy trends and patterns specific to the employee's sales activity without the inclusion of prospective advice or conjecture.
+
+
+
+
+
+
+
+
+
+
 def create_employee_prompt(employee_name):
     return f"""
     Analyze sales performance using the dataset with columns emp_name, customernameh2, sales_dec2023, 
