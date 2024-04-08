@@ -1,3 +1,26 @@
+Analyze the sales data for each customer with a focus on the following metrics: sales_dec2023, PreviousYearChange, RollingQuarterChange, YTDChange, MATCHange, and PreviousMonthChange. Identify customers with considerable shifts between November and December 2023 and provide insights only for those with the most significant changes as per these conditions:
+
+1. An increase or decrease in `PreviousMonthChange` by more than 50%.
+2. A `MATCHange` of greater than 30% in either direction, which could indicate a significant trend.
+3. A `YTDChange` or `PreviousYearChange` of more than 30%, reflecting major shifts over a longer period.
+4. Customers with a `RollingQuarterChange` greater than 20% suggesting notable quarterly performance.
+
+For each customer meeting any of the above criteria, articulate a precise insight that includes:
+
+- A comparison of their sales performance changes between November and December 2023.
+- Contextual factors from the data that may contribute to understanding these changes.
+- Label the insight with "Critical Alert" for negative trends or "Positive Highlight" for significant improvements.
+
+Construct a report of approximately 500 words, delivering insights for only those customers whose changes are most substantial, excluding customers with marginal or nominal fluctuations.
+
+
+
+
+
+
+
+
+
 Analyze the provided sales data with columns: emp_name, customernameh2, sales_dec2023, previous_month_change, PreviousYearChange, RollingQuarter, RollingQuarterPreviousYearChange, YTD, YTDChangeP, MAT, MATChangeP. Construct a 500-word report detailing:
 
 1. A ranked summary of each employee's sales performance, focusing on changes observed in previous_month_change, YTD, and MATChangeP, specifically highlighting any significant shifts or anomalies.
