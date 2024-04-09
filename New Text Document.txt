@@ -1,3 +1,26 @@
+Perform a detailed analysis of the sales data to calculate the delta in RollingQuarter and MAT between November and December for each customer. Based on the magnitude of these deltas, categorize customers into the following groups:
+
+1. 'Bad long-term trend continues' - Then further classify these customers into:
+   - Priority 1: Both Delta RollingQuarter and Delta MAT decrease by more than 20%.
+   - Priority 2: Both Delta RollingQuarter and Delta MAT decrease by 10-20%.
+   - Priority 3: Both Delta RollingQuarter and Delta MAT decrease by less than 10%.
+
+2. 'Bad long-term trend reversal start' - For customers with a positive Delta RollingQuarter but a negative Delta MAT.
+
+3. 'Bad long-term trend reversal' - For customers showing positive changes in both Delta RollingQuarter and Delta MAT.
+
+For each category, sort customers by the magnitude of their deltas and include the following in your report:
+
+- Customer's name.
+- Calculated Delta RollingQuarter.
+- Calculated Delta MAT.
+- Assigned category and priority level based on the deltas.
+
+Ensure that the report focuses on these specified categories and priorities, and excludes customers not meeting the criteria of having significant deltas.
+
+
+
+
 Analyze the sales data to calculate the delta in RollingQuarter and MAT between November and December for each customer. Use these deltas to categorize customers into the following groups as per the changes observed:
 
 1. 'Bad long-term trend continues' for customers who have a Negative change in both Delta RollingQuarter and Delta MAT.
