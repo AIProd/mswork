@@ -1,3 +1,27 @@
+Analyze the sales data to calculate the delta in RollingQuarter and MAT between November and December for each customer. Use these deltas to categorize customers into the following groups as per the changes observed:
+
+1. 'Bad long-term trend continues' for customers who have a Negative change in both Delta RollingQuarter and Delta MAT.
+2. 'Bad long-term trend reversal start' for customers who show a Positive change in Delta RollingQuarter but still a Negative change in Delta MAT.
+3. 'Bad long-term trend reversal' for customers who show a Positive change in both Delta RollingQuarter and Delta MAT.
+
+Present the findings in a report that lists only the customers falling into these categories. The report should include:
+
+- The customer's name.
+- The calculated Delta RollingQuarter.
+- The calculated Delta MAT.
+- The category each customer falls into based on their deltas.
+
+Exclude all customers who do not fall into any of these categories to ensure the report is concise and focused on the customers of interest as per the specified criteria.
+
+
+
+
+
+
+
+
+
+
 Analyze the sales data for each customer with a focus on the following metrics: sales_dec2023, PreviousYearChange, RollingQuarterChange, YTDChange, MATCHange, and PreviousMonthChange. Identify customers with considerable shifts between November and December 2023 and provide insights only for those with the most significant changes as per these conditions:
 
 1. An increase or decrease in `PreviousMonthChange` by more than 50%.
