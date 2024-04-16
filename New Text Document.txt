@@ -1,3 +1,38 @@
+Analyze the sales data focusing on the 'Retail' customer type and identify the top 15 customers based on MAT (Moving Annual Total) growth in December 2023. For each of these top customers, calculate the delta in RollingQuarter and MAT between November and December, considering DeltaRollingQuarterPreviousYearChange and DeltaMATCHangePY. Also, take into account the 'total_interactions' and 'Days_LastF2Fcall' as indicators of customer engagement and consent data to gauge communication permissions.
+
+Categorize these customers into the following groups based on the magnitude of these deltas, while also considering the context provided by the interaction and consent data:
+
+1. 'Bad long-term trend continues' - Then further classify these customers into:
+   - Priority 1: Both Delta RollingQuarterPreviousYearChange and Delta MATCHangePY show a decrease by more than 20%. Consider the 'total_interactions' and consent columns to assess if low engagement or consent issues might be contributing factors.
+   - Priority 2: Both Delta RollingQuarterPreviousYearChange and Delta MATCHangePY show a decrease by 10-20%. Review 'total_interactions' and the recency of 'Days_LastF2Fcall' to understand if efforts to re-engage have been made or consent limitations exist.
+   - Priority 3: Both Delta RollingQuarterPreviousYearChange and Delta MATCHangePY show a decrease by less than 10%. Evaluate if there's a correlation between interaction frequency, consent status, and the lesser decrease in sales metrics.
+
+2. 'Bad long-term trend reversal start' - For customers with a positive Delta RollingQuarterPreviousYearChange but a negative Delta MATCHangePY. Assess if improved interactions or recent consent changes may be influencing this reversal.
+
+3. 'Bad long-term trend reversal' - For customers showing positive changes in both Delta RollingQuarterPreviousYearChange and Delta MATCHangePY. Acknowledge if increased interactions and positive consent status align with these improvements.
+
+Provide a report that includes:
+
+- Customer's name.
+- Customer's type.
+- Delta RollingQuarterPreviousYearChange.
+- Delta MATCHangePY.
+- Total interactions.
+- Days since the last face-to-face call.
+- Consent status across all channels.
+- Assigned category and priority level.
+
+The report should give insight into how customer engagement and consent status may be influencing sales trends. Include only customers whose delta changes are significant as per the criteria and who rank in the top 15 by MAT growth.
+
+
+
+
+
+
+
+
+
+
 Perform a detailed analysis of the sales data to calculate the delta in RollingQuarter and MAT between November and December for each customer. Based on the magnitude of these deltas, categorize customers into the following groups:
 
 1. 'Bad long-term trend continues' - Then further classify these customers into:
