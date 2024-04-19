@@ -1,3 +1,40 @@
+import pandas as pd
+from youtube_transcript_api import YouTubeTranscriptApi
+
+# Load the Excel file
+df = pd.read_excel('/mnt/data/image.png')
+
+# Define a function to get the transcript
+def get_transcript(video_url):
+    video_id = video_url.split('watch?v=')[1]
+    try:
+        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        # Join all text elements in the transcript
+        return ' '.join([t['text'] for t in transcript])
+    except:
+        # Return an empty string if there's an error (video may not have transcripts available)
+        return ''
+
+# Apply the function to all rows in the DataFrame for the 'Youtubelinks' column
+df['Transcript'] = df['Youtubelinks'].apply(get_transcript)
+
+# Save the updated DataFrame back to a new Excel file
+df.to_excel('/mnt/data/updated_transcripts.xlsx', index=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Analyze the sales data focusing on the 'Retail' customer type and identify the top 15 customers based on MAT (Moving Annual Total) growth in December 2023. For each of these top customers, calculate the delta in RollingQuarter and MAT between November and December, considering DeltaRollingQuarterPreviousYearChange and DeltaMATCHangePY. Also, take into account the 'total_interactions' and 'Days_LastF2Fcall' as indicators of customer engagement and consent data to gauge communication permissions.
 
 Categorize these customers into the following groups based on the magnitude of these deltas, while also considering the context provided by the interaction and consent data:
