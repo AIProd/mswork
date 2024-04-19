@@ -1,5 +1,46 @@
 import pandas as pd
 from youtube_transcript_api import YouTubeTranscriptApi
+import os
+
+# Directory to save transcript files
+transcript_dir = '/mnt/data/transcripts'
+if not os.path.exists(transcript_dir):
+    os.makedirs(transcript_dir)
+
+def save_transcript_to_file(video_url):
+    video_id = video_url.split('watch?v=')[1]
+    transcript_filename = f"transcript_{video_id}.txt"
+    transcript_filepath = os.path.join(transcript_dir, transcript_filename)
+    try:
+        transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+        transcript_text = ' '.join([item['text'] for item in transcript_list])
+        
+        with open(transcript_filepath, 'w', encoding='utf-8') as file:
+            file.write(transcript_text)
+        
+        # Return the path to the transcript file
+        return transcript_filepath
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+# Load video URLs from Excel
+df = pd.read_excel('video_links.xlsx')
+
+# Apply the function to save transcripts to files and store the file paths in a new column
+df['transcript_file'] = df['Youtubelinks'].apply(save_transcript_to_file)
+
+# Save the updated DataFrame back to Excel
+df.to_excel('video_links_with_transcript_files.xlsx', index=False)
+
+
+
+
+
+
+
+import pandas as pd
+from youtube_transcript_api import YouTubeTranscriptApi
 
 # Load the Excel file
 df = pd.read_excel('/mnt/data/image.png')
