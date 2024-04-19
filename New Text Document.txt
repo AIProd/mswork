@@ -1,5 +1,50 @@
 import pandas as pd
 from youtube_transcript_api import YouTubeTranscriptApi
+
+# Load the Excel file
+df = pd.read_excel('/mnt/data/video_links.xlsx')
+
+def get_transcript_and_language(video_url):
+    video_id = video_url.split('watch?v=')[1]
+    try:
+        # Get a list of available transcripts
+        transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+        
+        # Fetch the first available transcript (regardless of language)
+        transcript = transcript_list.find_generated_transcript(['de', 'en'])
+        
+        # Get the transcript in its original language
+        transcript_data = transcript.fetch()
+        language = transcript.language_code
+        
+        # Join all text elements in the transcript
+        transcript_text = ' '.join([t['text'] for t in transcript_data])
+        return transcript_text, language
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Return None for both transcript and language if there's an error
+        return None, None
+
+# Apply the function to all rows in the DataFrame for the 'Youtubelinks' column
+df[['Transcript', 'Language']] = df['Youtubelinks'].apply(
+    lambda url: pd.Series(get_transcript_and_language(url))
+)
+
+# Save the updated DataFrame back to a new Excel file
+df.to_excel('/mnt/data/video_links_with_transcripts.xlsx', index=False)
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+from youtube_transcript_api import YouTubeTranscriptApi
 import os
 
 # Directory to save transcript files
