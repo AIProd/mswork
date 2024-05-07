@@ -1,4 +1,87 @@
 import pandas as pd
+import random
+import datetime
+
+# Sample data
+data = {
+    'InsightID': range(1, 11),
+    'AccountID': [random.randint(1, 3) for _ in range(10)],
+    'SourceType': ['Sales', 'Interaction', 'Consent', 'YouTube'] * 2 + ['Sales', 'Interaction'],
+    'TextData': [
+        "Great sales record",
+        "Customer was unhappy",
+        "Consent for marketing",
+        "Positive review on YouTube",
+        "Moderate sales record",
+        "Client was aggressive",
+        "Consent for emails",
+        "Negative review on YouTube",
+        "Poor sales record",
+        "Customer interaction"
+    ],
+    'InsightType': ['Revenue', 'Feedback', 'Marketing', 'Review'] * 2 + ['Revenue', 'Feedback'],
+    'CollectedOn': [datetime.date(2024, 1, random.randint(1, 31)) for _ in range(10)],
+    'JobRole': ['Manager', 'Analyst', 'Marketer'] * 3 + ['Manager'],
+    'InsightMonth': [1, 1, 1, 1, 2, 2, 2, 2, 1, 1]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+
+
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.pydantic_v1 import BaseModel, Field
+from langchain_openai import ChatOpenAI
+
+class CombinedInsights(BaseModel):
+    combined_insights: str = Field(description="Combined insights")
+
+# Define the prompt template
+combined_prompt = ChatPromptTemplate.from_template(
+    """
+Given the following insights from sales, consents, interactions, and YouTube, provide a combined analysis.
+
+Insights:
+{input}
+"""
+)
+
+# Initialize the model
+llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125").with_structured_output(CombinedInsights)
+
+# Create a chain for combining insights
+combined_chain = combined_prompt | llm
+
+# Function to fetch and combine insights for a particular month and job role
+def fetch_combined_insights(df, insight_month, job_role):
+    # Filter DataFrame based on conditions
+    filtered_df = df[(df['InsightMonth'] == insight_month) & (df['JobRole'] == job_role)]
+    insights_text = "\n".join(filtered_df['TextData'].tolist())
+    
+    # Get combined insights from the chain
+    result = combined_chain.invoke({"input": insights_text})
+    combined_insights = result['structured_output']['combined_insights']
+    return combined_insights
+
+# Example usage
+combined_analysis = fetch_combined_insights(df, insight_month=1, job_role='Manager')
+print(combined_analysis)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
 from youtube_transcript_api import YouTubeTranscriptApi
 
 # Load the Excel file
