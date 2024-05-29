@@ -1,4 +1,116 @@
 import pandas as pd
+from openai import OpenAI
+
+# Load the DataFrame (assuming you have the file path)
+file_path = '/mnt/data/your_file.xlsx'  # Update with your actual file path
+df = pd.read_excel(file_path)
+
+# Initialize OpenAI agent
+llm = OpenAI(api_key="your_openai_api_key")
+
+# Define columns for sales, interaction, and consent
+sales_column = 'sales_dec2023'
+interaction_columns = [
+    'total_interactions_MATQ_growth', 'total_interactions_ROLQ_growth',
+    'EVENTS - Veeva_MATQ_growth', 'CALLS - Veeva_MATQ_growth', 
+    'AE - Veeva_MATQ_growth', 'SFMC Marketing Email_MATQ_growth'
+]
+consent_columns = [
+    'Consent Approved Email Opt-In', 'Consent Approved Email Opt-Out',
+    'Consent Marketing Email Opt-In', 'Consent Marketing Email Opt-Out',
+    'Consent Postal Opt-In', 'Consent Postal Opt-Out',
+    'Consent Phone Opt-In', 'Consent Phone Opt-Out'
+]
+
+# Define prompt templates
+sales_prompt_template = """
+You are an expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains sales data.
+Given a customer with the following sales details:
+
+Customer Name: {customer_name}
+Sales for Dec 2023: {sales}
+
+Generate a detailed insight report for this customer focusing on sales trends and any significant changes.
+"""
+
+interaction_prompt_template = """
+You are an expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains interaction data.
+Given a customer with the following interaction details:
+
+Customer Name: {customer_name}
+Interaction Data: {interactions}
+
+Generate a detailed insight report for this customer focusing on interaction trends and their impact on sales.
+"""
+
+consent_prompt_template = """
+You are an expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains consent data.
+Given a customer with the following consent details:
+
+Customer Name: {customer_name}
+Consent Data: {consent}
+
+Generate a detailed insight report for this customer focusing on consent trends and their impact on sales.
+"""
+
+# Function to generate insights using LLM
+def generate_insight(prompt):
+    response = llm.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt,
+        max_tokens=200
+    )
+    return response.choices[0].text.strip()
+
+# Initialize an empty DataFrame to store insights
+insights_df = pd.DataFrame(columns=['Customer Name', 'Category', 'Insight'])
+
+# Generate insights for each customer and store in DataFrame
+for _, row in df.iterrows():
+    customer_name = row['acc_name']
+    
+    # Sales insight
+    sales_prompt = sales_prompt_template.format(customer_name=customer_name, sales=row[sales_column])
+    sales_insight = generate_insight(sales_prompt)
+    insights_df = insights_df.append({'Customer Name': customer_name, 'Category': 'Sales', 'Insight': sales_insight}, ignore_index=True)
+    
+    # Interaction insight
+    interactions = {key: row[key] for key in interaction_columns}
+    interaction_prompt = interaction_prompt_template.format(customer_name=customer_name, interactions=interactions)
+    interaction_insight = generate_insight(interaction_prompt)
+    insights_df = insights_df.append({'Customer Name': customer_name, 'Category': 'Interaction', 'Insight': interaction_insight}, ignore_index=True)
+    
+    # Consent insight
+    consent = {key: row[key] for key in consent_columns}
+    consent_prompt = consent_prompt_template.format(customer_name=customer_name, consent=consent)
+    consent_insight = generate_insight(consent_prompt)
+    insights_df = insights_df.append({'Customer Name': customer_name, 'Category': 'Consent', 'Insight': consent_insight}, ignore_index=True)
+
+# Print insights for review
+print(insights_df)
+
+# Optionally, save the insights to a CSV file
+insights_df.to_csv('/mnt/data/customer_insights.csv', index=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
 from langchain.llms import OpenAI
 
 # Load the DataFrame (assuming you have the file path)
