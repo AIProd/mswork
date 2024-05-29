@@ -1,3 +1,34 @@
+insights_list = []
+
+# Generate insights for each customer and store in DataFrame
+for _, row in df.iterrows():
+    customer_name = row['acc_name']
+    
+    # Sales insight
+    sales_prompt = sales_prompt_template.format(customer_name=customer_name, sales=row[sales_column])
+    sales_insight = generate_insight(sales_prompt)
+    insights_list.append({'Customer Name': customer_name, 'Category': 'Sales', 'Insight': sales_insight})
+    
+    # Interaction insight
+    interactions = {key: row[key] for key in interaction_columns}
+    interaction_prompt = interaction_prompt_template.format(customer_name=customer_name, interactions=interactions)
+    interaction_insight = generate_insight(interaction_prompt)
+    insights_list.append({'Customer Name': customer_name, 'Category': 'Interaction', 'Insight': interaction_insight})
+    
+    # Consent insight
+    consent = {key: row[key] for key in consent_columns}
+    consent_prompt = consent_prompt_template.format(customer_name=customer_name, consent=consent)
+    consent_insight = generate_insight(consent_prompt)
+    insights_list.append({'Customer Name': customer_name, 'Category': 'Consent', 'Insight': consent_insight})
+
+# Convert insights list to DataFrame
+insights_df = pd.DataFrame(insights_list)
+
+# Print insights for review
+print(insights_df)
+
+
+
 import pandas as pd
 from openai import OpenAI
 
