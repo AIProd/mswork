@@ -1,3 +1,120 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+deltas_columns = ['DeltaRollingQuarterPreviousYearChange', 'DeltaMATChangePY']
+sales_column = 'sales_dec2023'
+interaction_columns = ['total_interactions_MATQ_growth', 'total_interactions_ROLQ_growth']
+consent_columns = [
+    'Consent Approved Email Opt-In', 'Consent Approved Email Opt-Out',
+    'Consent Marketing Email Opt-In', 'Consent Marketing Email Opt-Out',
+    'Consent Postal Opt-In', 'Consent Postal Opt-Out'
+]
+
+# Function to categorize customers
+def categorize_customers(row):
+    delta_rq_change = row['DeltaRollingQuarterPreviousYearChange']
+    delta_mat_change = row['DeltaMATChangePY']
+    
+    if delta_rq_change < 0 and delta_mat_change < 0:
+        if delta_rq_change <= -0.2 and delta_mat_change <= -0.2:
+            return 'Bad long-term trend continues - Priority 1'
+        elif delta_rq_change <= -0.1 and delta_mat_change <= -0.1:
+            return 'Bad long-term trend continues - Priority 2'
+        else:
+            return 'Bad long-term trend continues - Priority 3'
+    elif delta_rq_change > 0 and delta_mat_change < 0:
+        return 'Bad long-term trend reversal start'
+    elif delta_rq_change > 0 and delta_mat_change > 0:
+        return 'Bad long-term trend reversal'
+    else:
+        return 'Other'
+
+# Apply categorization to DataFrame
+df['Category'] = df.apply(categorize_customers, axis=1)
+
+# Define the prompt template for generating insights
+prompt_template = """
+You are the best Data Science and Insights expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains sales data with respect to November and December 2023.
+Given a customer with the following details:
+
+Customer Name: {customer_name}
+Category: {category}
+Sales for Dec 2023: {sales}
+Interaction Data: {interactions}
+Consent Data: {consent}
+
+Generate a detailed insight report for this customer that includes:
+1. Assigned category and priority level.
+2. Contextual factors from the data that may contribute to understanding these changes.
+3. Insights into how customer interaction and consent status may be influencing sales trends.
+4. Label the insight with "Critical Alert" for negative trends or "Positive Highlight" for significant improvements.
+
+Construct a report of approximately 100 words for each customer, delivering insights for only those customers whose changes are most substantial, and remember to exclude customers with marginal or nominal fluctuations.
+"""
+
+# Function to generate insights for each customer using LLM
+def generate_insights(row):
+    customer_name = row['customername']
+    category = row['Category']
+    sales = row[sales_column]
+    interactions = {key: row[key] for key in interaction_columns}
+    consent = {key: row[key] for key in consent_columns}
+    
+    # Format the prompt with customer details
+    prompt = prompt_template.format(
+        customer_name=customer_name,
+        category=category,
+        sales=sales,
+        interactions=interactions,
+        consent=consent
+    )
+    
+    # Generate the insight using the LLM agent
+    response = llm(prompt)
+    return response
+
+# Generate insights for each customer and save to a list
+insights = df.apply(generate_insights, axis=1).tolist()
+
+# Print insights for review
+for insight in insights:
+    print(insight)
+    print('-' * 80)
+
+# Optionally, save the insights to a text file
+with open('/mnt/data/customer_insights.txt', 'w') as f:
+    for insight in insights:
+        f.write(insight + '\n')
+        f.write('-' * 80 + '\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import pandas as pd
 import random
 import datetime
