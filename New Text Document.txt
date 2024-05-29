@@ -1,3 +1,82 @@
+sales_columns = [
+    'sales_dec2023', 'DeltaRollingQuarterPreviousYearChange', 'DeltaMATChangePY',
+    'PreviousYearChange_dec2023', 'RollingQuarter_dec2023', 'MAT_dec2023'
+]
+interaction_columns = [
+    'total_interactions_MATQ_growth', 'total_interactions_ROLQ_growth',
+    'EVENTS - Veeva_MATQ_growth', 'CALLS - Veeva_MATQ_growth', 
+    'AE - Veeva_MATQ_growth', 'SFMC Marketing Email_MATQ_growth'
+]
+consent_columns = [
+    'Consent Approved Email Opt-In', 'Consent Approved Email Opt-Out',
+    'Consent Marketing Email Opt-In', 'Consent Marketing Email Opt-Out',
+    'Consent Postal Opt-In', 'Consent Postal Opt-Out',
+    'Consent Phone Opt-In', 'Consent Phone Opt-Out'
+]
+
+# Define prompt templates with column descriptions
+sales_prompt_template = """
+You are an expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains sales data.
+Given a customer with the following sales details:
+
+Customer Name: {customer_name}
+Sales Data: 
+{sales}
+
+Sales Data Descriptions:
+sales_dec2023: Total sales for the month of December 2023.
+DeltaRollingQuarterPreviousYearChange: Change in rolling quarter sales compared to the previous year.
+DeltaMATChangePY: Change in Moving Annual Total (MAT) sales compared to the previous year.
+PreviousYearChange_dec2023: Change in sales compared to December 2022.
+RollingQuarter_dec2023: Sales for the rolling quarter ending in December 2023.
+MAT_dec2023: Moving Annual Total (MAT) sales for the year ending in December 2023.
+
+Generate a detailed insight report for this customer focusing on sales trends and any significant changes.
+"""
+
+interaction_prompt_template = """
+You are an expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains interaction data.
+Given a customer with the following interaction details:
+
+Customer Name: {customer_name}
+Interaction Data: 
+{interactions}
+
+Interaction Data Descriptions:
+total_interactions_MATQ_growth: Total interactions growth for the Moving Annual Total (MAT) quarter.
+total_interactions_ROLQ_growth: Total interactions growth for the Rolling Quarter (ROLQ).
+EVENTS - Veeva_MATQ_growth: Growth in Veeva events for MAT quarter.
+CALLS - Veeva_MATQ_growth: Growth in Veeva calls for MAT quarter.
+AE - Veeva_MATQ_growth: Growth in Veeva account executive interactions for MAT quarter.
+SFMC Marketing Email_MATQ_growth: Growth in Salesforce Marketing Cloud email interactions for MAT quarter.
+
+Generate a detailed insight report for this customer focusing on interaction trends and their impact on sales.
+"""
+
+consent_prompt_template = """
+You are an expert in providing detailed insights.
+Our dataset is related to the healthcare industry and contains consent data.
+Given a customer with the following consent details:
+
+Customer Name: {customer_name}
+Consent Data: 
+{consent}
+
+Consent Data Descriptions:
+Consent Approved Email Opt-In: Date of consent for approved email opt-in.
+Consent Approved Email Opt-Out: Date of consent for approved email opt-out.
+Consent Marketing Email Opt-In: Date of consent for marketing email opt-in.
+Consent Marketing Email Opt-Out: Date of consent for marketing email opt-out.
+Consent Postal Opt-In: Date of consent for postal opt-in.
+Consent Postal Opt-Out: Date of consent for postal opt-out.
+Consent Phone Opt-In: Date of consent for phone opt-in.
+Consent Phone Opt-Out: Date of consent for phone opt-out.
+
+Generate a detailed insight report for this customer focusing on consent trends and their impact on sales.
+"""
+
 insights_list = []
 
 # Generate insights for each customer and store in DataFrame
