@@ -1,6 +1,28 @@
 def clean_finding_text(finding_text):
     # Remove escape characters and unnecessary backslashes
     cleaned_text = finding_text.replace("\\n", "\n").replace("\\", "").replace('\'', '')
+
+    # Convert the cleaned string to a dictionary and format it
+    cleaned_text = eval(cleaned_text)
+    
+    # Format the dictionary into a readable string
+    formatted_text = ""
+    for key, value in cleaned_text.items():
+        formatted_text += f"{key}:\n{value}\n\n"
+    
+    return formatted_text.strip()
+
+# Apply the function to the 'Finding' column
+df['Formatted Finding'] = df['Finding'].apply(clean_finding_text)
+
+
+
+
+
+
+def clean_finding_text(finding_text):
+    # Remove escape characters and unnecessary backslashes
+    cleaned_text = finding_text.replace("\\n", "\n").replace("\\", "").replace('\'', '')
     
     # Split the text into lines and format it in a readable manner
     lines = cleaned_text.split("\n")
