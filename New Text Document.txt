@@ -1,3 +1,74 @@
+
+
+
+
+
+
+Step 1: Data Extraction from SQL Tables
+Objective: Extract raw data from SQL tables related to sales, interactions, and consent.
+
+Details:
+
+Identify relevant SQL tables and columns.
+Write SQL queries to extract the necessary data.
+Combine and clean the data, ensuring only relevant columns are included.
+Store the extracted data in a combined SQL table for ease of further processing.
+
+Step 2: Data Preparation and Export
+Objective: Prepare the combined data for further analysis.
+
+Details:
+
+Ensure data integrity and handle missing values.
+Export the combined data as a CSV file.
+
+Step 3: Complex Computation and Analysis
+Objective: Perform complex computations for each period and prepare the data for GPT analysis.
+
+Details:
+
+Read the CSV file into a DataFrame.
+Perform any required computations (e.g., growth rates, trend analysis).
+
+Step 4: Generate Insights Using GPT
+Objective: Use GPT to generate detailed insights for sales, interactions, and consent data.
+
+Details:
+
+Define prompts for GPT to generate insights.
+Iterate through each account and generate insights.
+Store insights in a DataFrame.
+
+Step 5: Building a Knowledge Base
+Objective: Store and organize the generated insights in a knowledge base for easy access and retrieval.
+
+Details:
+
+Organize insights by customer and category.
+Store insights in a database or knowledge management system.
+Provide interfaces for querying and retrieving insights.
+
+
+Summary
+Data Extraction from SQL Tables: Extract relevant data from SQL tables and combine them into a single table.
+Data Preparation and Export: Prepare the combined data and export it as a CSV file.
+Complex Computation and Analysis: Perform required computations and prepare the data for GPT analysis.
+Generate Insights Using GPT: Use GPT to generate detailed insights for sales, interactions, and consent data.
+Building a Knowledge Base: Store and organize the generated insights in a knowledge base for easy access and retrieval.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sales_columns = [
     'sales_dec2023', 'DeltaRollingQuarterPreviousYearChange', 'DeltaMATChangePY',
     'PreviousYearChange_dec2023', 'RollingQuarter_dec2023', 'MAT_dec2023'
