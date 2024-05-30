@@ -1,5 +1,7 @@
 ADDERSS(ROW(D3);COLUMN(D3);4)
 
+SUBSTITUTE(ADDRESS(ROW(),COLUMN()),"$","")
+
 def clean_finding_text(finding_text):
     # Remove escape characters and unnecessary backslashes
     cleaned_text = finding_text.replace("\\n", "\n").replace("\\", "").replace('\"', '"').replace("'", "")
