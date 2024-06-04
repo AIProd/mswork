@@ -1,19 +1,15 @@
-import pandas as pd
+def explode_and_clean(df, column):
+    # Flatten the lists if they are nested
+    df[column] = df[column].apply(lambda x: [item for sublist in x for item in sublist] if isinstance(x, list) and any(isinstance(i, list) for i in x) else x)
+    # Explode the column
+    df = df.explode(column).reset_index(drop=True)
+    # Replace empty strings and NaNs with pd.NA
+    df[column] = df[column].replace([np.nan, '', 'nan'], pd.NA)
+    # Drop rows where the column is NaN
+    return df.dropna(subset=[column])
 
-# Load your data from CSV if needed
-# df = pd.read_csv('path_to_your_file.csv')
-
-# Simulated data based on your description
-data = {
-    'channel': ['CALLS - Veeva', 'CALLS - Veeva', 'CALLS - Veeva', 'Google Analytics Session'],
-    'int_type': ['In Person', 'In Person', 'In Person', None],
-    'int_subtype': ['Face to Face', 'Face to Face', 'Face to Face', None],
-    'taxonomy_key': ['a043X00000yC5plQAC', 'a043X00000w4vQAI', 'a043X00000y0u6aQAC', None],
-    'sales_channel': [None, None, None, None],
-    'brand_name': [['GARDASIL9'], [None, 'GARDASIL9'], ['VARIVAX', 'MMRVAXPRO', 'PROQUAD', 'GARDASIL9'], None],
-    'count': [None, None, None, None]
-}
-
+# Applying the function
+interaction_data_cleaned = explode_and_clean(interaction_data, 'brand_name')
 df = pd.DataFrame(data)
 
 # Function to explode 'brand_name' column and remove NaNs and empty strings
