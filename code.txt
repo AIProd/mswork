@@ -1,12 +1,15 @@
 def explode_and_clean(df, column):
-    # Flatten the lists if they are nested
-    df[column] = df[column].apply(lambda x: [item for sublist in x for item in sublist] if isinstance(x, list) and any(isinstance(i, list) for i in x) else x)
+    # Replace np.nan with None for consistency
+    df[column] = df[column].apply(lambda x: [None if isinstance(i, float) and np.isnan(i) else i for i in x] if isinstance(x, list) else x)
     # Explode the column
     df = df.explode(column).reset_index(drop=True)
-    # Replace empty strings and NaNs with pd.NA
-    df[column] = df[column].replace([np.nan, '', 'nan'], pd.NA)
+    # Replace None and empty strings with pd.NA
+    df[column] = df[column].replace([None, '', 'nan'], pd.NA)
     # Drop rows where the column is NaN
     return df.dropna(subset=[column])
+
+# Applying the function
+interaction_data_cleaned = explode_and_clean(interaction_data, 'brand_name')
 
 # Applying the function
 interaction_data_cleaned = explode_and_clean(interaction_data, 'brand_name')
