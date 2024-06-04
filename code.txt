@@ -1,3 +1,12 @@
+def explode_and_clean(df, column):
+    df = df.explode(column).reset_index(drop=True)
+    df[column] = df[column].replace('', pd.NA)
+    return df.dropna(subset=[column])
+
+# Applying the function
+df_cleaned = explode_and_clean(df, 'brand_name')
+
+
 ADDERSS(ROW(D3);COLUMN(D3);4)
 
 SUBSTITUTE(ADDRESS(ROW(),COLUMN()),"$","")
