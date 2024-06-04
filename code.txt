@@ -17,7 +17,20 @@ def initial_cleaning(df, column):
     return df
 
 # Applying the initial cleaning and formatting check function
-interaction_data_cleaned = initial_cleaning(interaction_data, 'brand_name')
+interaction_data_cleaned = initial_cleaning(interaction_data, 'brand_name
+
+
+def explode_and_clean(df, column):
+    # Explode the column
+    df = df.explode(column).reset_index(drop=True)
+    # Replace None and empty strings with pd.NA
+    df[column] = df[column].replace([None, '', 'nan'], pd.NA)
+    # Drop rows where the column is NaN
+    return df.dropna(subset=[column])
+
+# Applying the function
+interaction_data_final_cleaned = explode_and_clean(interaction_data_cleaned, 'brand_name')
+
 
 # Applying the function
 interaction_data_cleaned = explode_and_clean(interaction_data, 'brand_name')
