@@ -1,3 +1,50 @@
+import pandas as pd
+
+# Load your data from CSV if needed
+# df = pd.read_csv('path_to_your_file.csv')
+
+# Simulated data based on your description
+data = {
+    'channel': ['CALLS - Veeva', 'CALLS - Veeva', 'CALLS - Veeva', 'Google Analytics Session'],
+    'int_type': ['In Person', 'In Person', 'In Person', None],
+    'int_subtype': ['Face to Face', 'Face to Face', 'Face to Face', None],
+    'taxonomy_key': ['a043X00000yC5plQAC', 'a043X00000w4vQAI', 'a043X00000y0u6aQAC', None],
+    'sales_channel': [None, None, None, None],
+    'brand_name': [['GARDASIL9'], [None, 'GARDASIL9'], ['VARIVAX', 'MMRVAXPRO', 'PROQUAD', 'GARDASIL9'], None],
+    'count': [None, None, None, None]
+}
+
+df = pd.DataFrame(data)
+
+# Function to explode 'brand_name' column and remove NaNs and empty strings
+def explode_and_clean(df, column):
+    # Ensure the column is of type list if not already
+    df[column] = df[column].apply(lambda x: x if isinstance(x, list) else [x])
+    # Explode the column
+    df = df.explode(column).reset_index(drop=True)
+    # Replace empty strings with NaN and drop rows where column is NaN
+    df[column] = df[column].replace('', pd.NA)
+    return df.dropna(subset=[column])
+
+# Applying the function
+df_cleaned = explode_and_clean(df, 'brand_name')
+
+# Save the cleaned DataFrame to a CSV file
+df_cleaned.to_csv('/mnt/data/cleaned_dataframe.csv', index=False)
+
+# Display the cleaned DataFrame
+print(df_cleaned)
+
+
+
+
+
+
+
+
+
+
+
 def explode_and_clean(df, column):
     df = df.explode(column).reset_index(drop=True)
     df[column] = df[column].replace('', pd.NA)
