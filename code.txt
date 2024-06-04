@@ -1,3 +1,16 @@
+# Function to explode 'brand_name' column and remove NaNs
+def explode_and_clean(df, column):
+    df = df.explode(column).reset_index(drop=True)
+    df[column] = df[column].replace([None, '', 'nan', np.nan], pd.NA)
+    return df.dropna(subset=[column])
+
+# Applying the function
+interaction_data_exploded = explode_and_clean(interaction_data, 'brand_name')
+
+
+
+
+
 flatten_and_clean(df, column):
     def flatten(lst):
         flat_list = []
