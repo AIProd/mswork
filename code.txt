@@ -1,3 +1,8 @@
+
+data = {
+    'brand_name': [["VARIVAX", "MMRVAXPRO", "PROQUAD", "GARDASIL9", np.nan]]
+}
+interaction_data = pd.DataFrame(data)
 # Function to explode 'brand_name' column and remove NaNs
 def explode_and_clean(df, column):
     df = df.explode(column).reset_index(drop=True)
