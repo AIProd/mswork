@@ -1,4 +1,12 @@
 def explode_and_clean(df, column):
+    df[column] = df[column].apply(lambda x: [i for i in x if pd.notna(i)] if isinstance(x, list) else x)
+    df = df.explode(column).reset_index(drop=True)
+    df[column] = df[column].replace('', pd.NA)
+    return df.dropna(subset=[column])
+
+
+
+def explode_and_clean(df, column):
     df = df.explode(column).reset_index(drop=True)
     df[column] = df[column].replace('', pd.NA)
     return df.dropna(subset=[column])
