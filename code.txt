@@ -21,7 +21,8 @@ def explode_and_clean(df, column):
     return df.dropna(subset=[column])
 
 # Applying the function
-interaction_data_final_cl
+interaction_data_final_cleaned = explode_and_clean(interaction_data_cleaned, 'brand_name')
+
 
 
 
