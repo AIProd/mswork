@@ -1,12 +1,23 @@
-def explode_and_clean(df, column):
-    # Replace np.nan with None for consistency
+def initial_cleaning(df, column):
+    # Check the type of each element in the column
+    df['type_check'] = df[column].apply(lambda x: type(x))
+    
+    # Replace np.nan with None for consistency within lists
     df[column] = df[column].apply(lambda x: [None if isinstance(i, float) and np.isnan(i) else i for i in x] if isinstance(x, list) else x)
-    # Explode the column
-    df = df.explode(column).reset_index(drop=True)
-    # Replace None and empty strings with pd.NA
-    df[column] = df[column].replace([None, '', 'nan'], pd.NA)
-    # Drop rows where the column is NaN
-    return df.dropna(subset=[column])
+    
+    # Check if any element is not a list and convert it to a list
+    df[column] = df[column].apply(lambda x: x if isinstance(x, list) else [x])
+    
+    # Print the type check results
+    print(df['type_check'].value_counts())
+    
+    # Drop the type check column after inspection
+    df = df.drop(columns=['type_check'])
+    
+    return df
+
+# Applying the initial cleaning and formatting check function
+interaction_data_cleaned = initial_cleaning(interaction_data, 'brand_name')
 
 # Applying the function
 interaction_data_cleaned = explode_and_clean(interaction_data, 'brand_name')
