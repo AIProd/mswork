@@ -1,3 +1,42 @@
+flatten_and_clean(df, column):
+    def flatten(lst):
+        flat_list = []
+        for item in lst:
+            if isinstance(item, list):
+                flat_list.extend(flatten(item))
+            else:
+                flat_list.append(item)
+        return flat_list
+
+    df[column] = df[column].apply(lambda x: flatten(x) if isinstance(x, list) else x)
+    df[column] = df[column].apply(lambda x: [None if isinstance(i, float) and np.isnan(i) else i for i in x] if isinstance(x, list) else x)
+    return df
+
+# Applying the flattening and cleaning function
+interaction_data_cleaned = flatten_and_clean(interaction_data, 'brand_name')
+
+# Display the cleaned DataFrame after initial cleaning
+print(interaction_data_cleaned.head(20))
+
+# Function to explode 'brand_name' column and remove NaNs and empty strings
+def explode_and_clean(df, column):
+    df = df.explode(column).reset_index(drop=True)
+    df[column] = df[column].replace([None, '', 'nan'], pd.NA)
+    return df.dropna(subset=[column])
+
+# Applying the function
+interaction_data_final_cleaned = explode_and_clean(interaction_data_cleaned, 'brand_name')
+
+
+
+
+
+
+
+
+
+
+
 def initial_cleaning(df, column):
     # Ensure all elements are lists and replace np.nan with None within lists
     df[column] = df[column].apply(lambda x: [None if isinstance(i, float) and np.isnan(i) else i for sublist in x for i in (sublist if isinstance(sublist, list) else [sublist])] if isinstance(x, list) else x)
