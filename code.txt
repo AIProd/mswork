@@ -1,3 +1,4 @@
+interaction_data['brand_name'] = interaction_data['brand_name'].apply(lambda x: ast.literal_eval(x.replace('nan', 'None')))
 
 data = {
     'brand_name': [["VARIVAX", "MMRVAXPRO", "PROQUAD", "GARDASIL9", np.nan]]
