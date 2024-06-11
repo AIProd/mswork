@@ -1,4 +1,52 @@
 
+import pandas as pd
+
+# Assuming df_dec is your original December DataFrame
+# df_dec = pd.read_csv('your_december_data.csv')  # Load your data
+
+# Define the columns based on the given image
+columns = ['Date', 'Freq', 'Time Desc', 'Type', 'Account', 'Brand', 'Finding']
+
+# Initialize the new DataFrame
+df_new = pd.DataFrame(columns=columns)
+
+# Populate the new DataFrame
+for idx, row in df_dec.iterrows():
+    if row['Type'] == 'Sales':
+        finding = analyse_finding_sales(row)
+    elif row['Type'] == 'Interaction':
+        finding = analyse_finding_interaction(row)
+    elif 'Consents' in row['Type']:
+        finding = analyse_finding_consents(row)
+    else:
+        finding = "No specific finding."
+
+    # Append the new row to the new DataFrame
+    df_new = df_new.append({
+        'Date': '1.12.2023',  # Assuming the date is the same as in the example
+        'Freq': 'Month',  # Assuming the frequency is the same
+        'Time Desc': 'Covering changes in October data to November data',  # Placeholder description
+        'Type': row['Type'],
+        'Account': row['Account'],
+        'Brand': row['Brand'],
+        'Finding': finding
+    }, ignore_index=True)
+
+# Display the new DataFrame
+print(df_new)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
