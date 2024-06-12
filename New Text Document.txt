@@ -1,3 +1,13 @@
+def analyse_finding_consents(row):
+    # Example analysis logic for consents based on F2F call dates
+    findings = []
+    if pd.notnull(row.get('NextF2Fcall_dec23')):
+        findings.append(f"Next call in {row['NextF2Fcall_dec23']} days")
+    if pd.notnull(row.get('LastF2Fcall_dec23')):
+        findings.append(f"Last call was {row['LastF2Fcall_dec23']} days ago")
+    return "; ".join(findings) if findings else "No F2F call information available."
+
+
 import pandas as pd
 
 # Assuming df_dec is your original December DataFrame
