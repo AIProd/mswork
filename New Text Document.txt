@@ -1,3 +1,50 @@
+def analyze_metrics_consent(row, result_df):
+    acc_name = row['acc_name']
+    relevant_titles = [
+        'Consent Approved Email Opt-In',
+        'Consent Approved Email Opt-Out',
+        'Consent Marketing Email Opt-In',
+        'Consent Marketing Email Opt-Out'
+    ]
+    
+    counts = {
+        'Consent Approved Email Opt-In': 0,
+        'Consent Approved Email Opt-Out': 0,
+        'Consent Marketing Email Opt-In': 0,
+        'Consent Marketing Email Opt-Out': 0
+    }
+    
+    # Filter result_df for the given account and relevant titles
+    filtered_df = result_df[(result_df['acc_name'] == acc_name) & (result_df['int_title'].isin(relevant_titles))]
+    
+    # Calculate counts
+    title_counts = filtered_df.groupby('int_title')['int_title_count'].sum().to_dict()
+    
+    for title in relevant_titles:
+        if title in title_counts:
+            counts[title] = title_counts[title]
+    
+    # Create the formatted string, omitting categories with zero counts
+    result_parts = []
+    for title, count in counts.items():
+        if count > 0:
+            result_parts.append(f"{count} {title}")
+    
+    # If all counts are zero, return None
+    if not result_parts:
+        return None
+    
+    result = ', '.join(result_parts)
+    return result
+
+
+
+
+
+
+
+
+
 if all(value == 0 for value in counts.values()):
         return None
 def analyze_metrics_consent(row, result_df):
