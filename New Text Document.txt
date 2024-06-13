@@ -1,3 +1,39 @@
+import pandas as pd
+from datetime import datetime, timedelta
+
+# Load the dataset
+file_path = '/mnt/data/your_dataset_file.xlsx'
+df = pd.read_excel(file_path)
+
+# Convert 'cases_date' to datetime
+df['cases_date'] = pd.to_datetime(df['cases_date'], format='%m/%d/%Y')
+
+# Define the date range (last 3 months from December 31, 2023)
+end_date = datetime(2023, 12, 31)
+start_date = end_date - timedelta(days=90)
+
+# Filter the data for the last 3 months
+filtered_df = df[(df['cases_date'] >= start_date) & (df['cases_date'] <= end_date)]
+
+# Count unique 'pk_mdm_key' records for each 'acc_name'
+unique_mdm_counts = filtered_df.groupby('acc_name')['pk_mdm_key'].nunique().reset_index()
+unique_mdm_counts.columns = ['acc_name', 'unique_mdm_count']
+
+# Get 'int_title' date counts in each category
+int_title_counts = filtered_df.groupby(['acc_name', 'int_title']).size().reset_index(name='int_title_count')
+
+# Merge the two dataframes to have both unique counts and int_title counts
+result_df = unique_mdm_counts.merge(int_title_counts, on='acc_name', how='left')
+
+# Display the result
+import ace_tools as tools; tools.display_dataframe_to_user(name="Filtered Consent Data", dataframe=result_df)
+
+
+
+
+
+
+
 def analyse_finding_consents(row):
     # Example analysis logic for consents based on F2F call dates
     findings = []
