@@ -1,3 +1,67 @@
+
+import pandas as pd
+
+def analyze_metrics_consent(row, result_df):
+    acc_name = row['acc_name']
+    relevant_titles = [
+        'Consent Approved Email Opt-In',
+        'Consent Approved Email Opt-Out',
+        'Consent Marketing Email Opt-In',
+        'Consent Marketing Email Opt-Out'
+    ]
+    
+    counts = {
+        'Consent Approved Email Opt-In': 0,
+        'Consent Approved Email Opt-Out': 0,
+        'Consent Marketing Email Opt-In': 0,
+        'Consent Marketing Email Opt-Out': 0
+    }
+    
+    # Filter result_df for the given account and relevant titles
+    filtered_df = result_df[(result_df['acc_name'] == acc_name) & (result_df['int_title'].isin(relevant_titles))]
+    
+    # Calculate counts
+    title_counts = filtered_df.groupby('int_title')['int_title_count'].sum().to_dict()
+    
+    for title in relevant_titles:
+        if title in title_counts:
+            counts[title] = title_counts[title]
+    
+    return counts
+
+# Example loop to append results to newrows
+newrows = []
+for idx, row in result_df.iterrows():
+    for type_ in ['Consents']:
+        if type_ == 'Consents':
+            finding = analyze_metrics_consent(row, result_df)
+            # Append the new row to the new DataFrame
+            newrows.append({
+                'Date': '1.12.2023',  # Assuming the date is the same as in the example
+                'Freq': 'Month',  # Assuming the frequency is the same
+                'Time Desc': 'Covering changes in November data to December data',  # Placeholder description
+                'Type': type_,
+                'Account': row['acc_name'],
+                'Brand': '',  # Assuming brand_name is not provided in the row
+                'Finding': finding
+            })
+
+# Convert newrows to a DataFrame and display it
+new_df = pd.DataFrame(newrows)
+import ace_tools as tools; tools.display_dataframe_to_user(name="Consent Metrics", dataframe=new_df)
+
+
+
+
+
+
+
+
+
+
+
+
+
 import pandas as pd
 from datetime import datetime, timedelta
 
