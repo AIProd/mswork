@@ -1,6 +1,100 @@
 import pandas as pd
 from datetime import datetime, timedelta
 
+# Function to get AE and ME counts gained and lost in the last 3 months using result_df
+def get_ae_me_counts(result_df, end_date, months=3):
+    # Define the date range (last 3 months from end_date)
+    start_date = end_date - timedelta(days=months*30)
+
+    # Filter the data for the last 3 months
+    filtered_df = result_df[(result_df['cases_date'] >= start_date) & (result_df['cases_date'] <= end_date)]
+
+    # Initialize counts
+    ae_gained = 0
+    me_gained = 0
+    ae_lost = 0
+    me_lost = 0
+
+    # Get unique 'pk_mdm_key' counts for each 'acc_name' and 'int_title'
+    current_counts = filtered_df.groupby(['acc_name', 'int_title'])['pk_mdm_key'].nunique().reset_index()
+    current_counts.columns = ['acc_name', 'int_title', 'current_count']
+
+    # Filter data for the previous 3 months
+    previous_start_date = start_date - timedelta(days=months*30)
+    previous_end_date = start_date
+    previous_df = result_df[(result_df['cases_date'] >= previous_start_date) & (result_df['cases_date'] <= previous_end_date)]
+    
+    previous_counts = previous_df.groupby(['acc_name', 'int_title'])['pk_mdm_key'].nunique().reset_index()
+    previous_counts.columns = ['acc_name', 'int_title', 'previous_count']
+
+    # Merge current and previous counts
+    counts_df = pd.merge(current_counts, previous_counts, on=['acc_name', 'int_title'], how='outer').fillna(0)
+    
+    # Calculate gains and losses
+    for index, row in counts_df.iterrows():
+        if 'Approved Email' in row['int_title']:
+            if row['current_count'] > row['previous_count']:
+                ae_gained += row['current_count'] - row['previous_count']
+            elif row['current_count'] < row['previous_count']:
+                ae_lost += row['previous_count'] - row['current_count']
+        elif 'Marketing Email' in row['int_title']:
+            if row['current_count'] > row['previous_count']:
+                me_gained += row['current_count'] - row['previous_count']
+            elif row['current_count'] < row['previous_count']:
+                me_lost += row['previous_count'] - row['current_count']
+
+    return ae_gained, me_gained, ae_lost, me_lost
+
+# Assuming result_df is already defined and available
+
+# Define the end date
+end_date = datetime(2023, 12, 31)
+
+# Get the counts
+ae_gained, me_gained, ae_lost, me_lost = get_ae_me_counts(result_df, end_date)
+
+# Display the results
+print(f"AE counts gained: {ae_gained}")
+print(f"ME counts gained: {me_gained}")
+print(f"AE counts lost: {ae_lost}")
+print(f"ME counts lost: {me_lost}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+from datetime import datetime, timedelta
+
 # Load the dataset
 file_path = '/mnt/data/your_dataset_file.xlsx'
 df = pd.read_excel(file_path)
