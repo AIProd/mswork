@@ -1,3 +1,84 @@
+import pandas as pd
+
+def analyze_metrics_consent(acc_name, result_df):
+    relevant_titles = [
+        'Consent Approved Email Opt-In',
+        'Consent Approved Email Opt-Out',
+        'Consent Marketing Email Opt-In',
+        'Consent Marketing Email Opt-Out'
+    ]
+    
+    counts = {
+        'Consent Approved Email Opt-In': 0,
+        'Consent Approved Email Opt-Out': 0,
+        'Consent Marketing Email Opt-In': 0,
+        'Consent Marketing Email Opt-Out': 0
+    }
+    
+    # Filter result_df for the given account and relevant titles
+    filtered_df = result_df[(result_df['acc_name'] == acc_name) & (result_df['int_title'].isin(relevant_titles))]
+    
+    # Calculate counts
+    title_counts = filtered_df.groupby('int_title')['int_title_count'].sum().to_dict()
+    
+    for title in relevant_titles:
+        if title in title_counts:
+            counts[title] = title_counts[title]
+    
+    # Create the formatted string, omitting categories with zero counts
+    result_parts = []
+    for title, count in counts.items():
+        if count > 0:
+            result_parts.append(f"{count} {title}")
+    
+    # If all counts are zero, return None
+    if not result_parts:
+        return None
+    
+    result = ', '.join(result_parts)
+    return result
+
+# Example loop to append results to newrows
+newrows = []
+processed_accounts = set()  # Set to keep track of processed accounts
+
+for idx, row in result_df.iterrows():
+    acc_name = row['acc_name']
+    if acc_name not in processed_accounts:
+        finding = analyze_metrics_consent(acc_name, result_df)
+        if finding:  # Only add the record if finding is not None
+            # Append the new row to the new DataFrame
+            newrows.append({
+                'Date': '1.12.2023',  # Assuming the date is the same as in the example
+                'Freq': 'Month',  # Assuming the frequency is the same
+                'Time Desc': 'Covering changes in November data to December data',  # Placeholder description
+                'Type': 'Consents',
+                'Account': acc_name,
+                'Brand': '',  # Assuming brand_name is not provided in the row
+                'Finding': finding
+            })
+        # Mark this account as processed
+        processed_accounts.add(acc_name)
+
+# Convert newrows to a DataFrame and display it
+new_df = pd.DataFrame(newrows)
+import ace_tools as tools; tools.display_dataframe_to_user(name="Consent Metrics", dataframe=new_df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def analyze_metrics_consent(row, result_df):
     acc_name = row['acc_name']
     relevant_titles = [
