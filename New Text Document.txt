@@ -1,3 +1,10 @@
+processed_accounts = set()
+for idx, row in result_df.iterrows():
+    acc_name = row['acc_name']
+    if acc_name in processed_accounts:
+        continue  # Skip duplicate accounts
+    processed_accounts.add(acc_name)
+
 import pandas as pd
 
 def analyze_metrics_consent(acc_name, result_df):
