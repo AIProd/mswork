@@ -1,3 +1,46 @@
+I have a table with insights on interactions, sales, and consents for various accounts in the pharma industry for December. Each row represents data for an account, and the columns include the date, frequency, time description, type (interaction, sales, or consent), account name, brand name, and finding.
+
+Here's a sample of the data in the table:
+Date: 1.12.2023
+Frequency: Month
+Time Description: Covering changes in October data to November data
+Type: Interaction
+Account: Account A
+Brand: Brand X
+Finding: MAT Growth, RollQ decline: Long-term growth continues despite a persistent downturn recently.
+
+Date: 1.12.2023
+Frequency: Month
+Time Description: Covering changes in October data to November data
+Type: Sales
+Account: Account A
+Brand: Brand X
+Finding: MAT Growth, RollQ decline: Long-term growth continues despite a persistent downturn recently.
+
+Date: 1.12.2023
+Frequency: Month
+Time Description: Covering changes in October data to November data
+Type: Consents
+Account: Account A
+Brand: Brand X
+Finding: Next call in 10 days
+
+Please generate a summary of the monthly insights to be shared with stakeholders of the pharma sales team. The summary should highlight key trends, notable findings, and actionable recommendations based on the data provided. Make sure to address each type (interaction, sales, consents) separately and provide a comprehensive overview that stakeholders can use to understand the performance and necessary actions for improvement.
+
+Here is the table data:
+[Insert your table data here]
+
+Generate the monthly insights.
+
+
+
+
+
+
+
+
+
+
 def analyze_metrics_consent(acc_name, result_df):
     relevant_titles = [
         'Consent Approved Email Opt-In',
