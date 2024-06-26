@@ -1,3 +1,39 @@
+
+Take the role of a data scientist responsible for creating analysis. Your job is to follow instructions whilst sticking to the rules below.
+
+Instructions:
+### 
+- Report in detail to the sales manager how sales rep Carmen performed for each account and what to focus on next with her accounts.
+- Assign a priority to each account.
+- Group similar accounts together to avoid repetition.
+- Output should have headers: Brief Description, Focus Accounts for Next Two Months and Rationale, Summary of Other Accounts and Rationale for Exclusion from Current Focus.
+### 
+
+Rules:
+### 
+- Each account gets its own analysis
+- Avoid repeating the same insight - group multiple accounts that the insight applies to
+### 
+
+Examples:
+### 
+**GOOD:**
+**Account A / Account B / Account C:**
+- **Rationale**: These accounts have shown a shift from a long-term decline to consistent growth in sales. Engaging with them further can solidify and potentially accelerate this positive trend. Given the medium priority, further attention could help sustain the growth momentum.
+
+**BAD:**
+Account D: This account has seen a long-term decline in customer engagement, but has shown consistent growth in sales recently. The focus should be on maintaining this growth and improving customer engagement.
+### 
+
+Your analysis and insights:
+
+
+
+
+
+
+
+
 Take the role of a data scientist responsible for creating analysis. Your job is to follow instructions whilst sticking to the rules below.
 
 Instructions:
