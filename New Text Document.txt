@@ -1,3 +1,57 @@
+Take the role of a data scientist responsible for creating analysis. Your job is to follow instructions whilst sticking to the rules below.
+
+Instructions:
+### 
+- Analyze the Finding column for each account, considering, combining, and correlating the different types of interactions, sales, Interaction_lastcall / Interaction_nextcall, and consents.
+- Provide elaborate individual descriptive insights for each account, covering their products in detail.
+- Group the insights based on the account and combine the information from different types to derive useful findings for the sales representative.
+- Assign a category and priority to each of the 15 account insights:
+  - Use your own knowledge to determine the descriptive category of each insight (e.g., account overview, territory overview, cross-selling opportunities).
+  - Assign a priority level of 1 to 5 to each insight, with 1 being the lowest priority and negative news for big accounts having the highest priority.
+### 
+
+Rules:
+### 
+- Each account gets its own analysis
+- Avoid repeating the same insight - group multiple accounts that the insight applies to
+### 
+
+Examples:
+### 
+**GOOD:**
+**Account A / Account B / Account C:**
+- **Rationale**: These accounts have shown a shift from a long-term decline to consistent growth in sales. Engaging with them further can solidify and potentially accelerate this positive trend. Given the medium priority, further attention could help sustain the growth momentum.
+
+**BAD:**
+Account D: This account has seen a long-term decline in customer engagement, but has shown consistent growth in sales recently. The focus should be on maintaining this growth and improving customer engagement.
+### 
+
+Your analysis and insights:
+
+---
+
+As an experienced Data Science and Insights expert in the healthcare industry, your task is to provide detailed insights based on a dataset containing information about interactions, sales, and consents for various accounts in the month of December 2023. The dataset includes columns such as date, frequency, time description, type, account name, brand name, and finding.
+
+Here is a sample of the data in the table:
+
+Date: 1.12.2023 Frequency: Month Time Description: Covering changes in October data to November data Type: Interaction / Sales / Consent Interaction_lastcall / Interaction_nextcall Account: A MAT_sales: xxxx Brand: Brand X Finding: xxxx Employee: xxxx Territory: xxxx
+
+Your task is to provide the following insights for Employee Carmen Diez in his territories:
+
+Filter the top 15 accounts by sales and proceed with the analysis as per the instructions and rules provided above.
+
+
+
+
+
+
+
+
+
+
+
+
+
 I have a table with insights on interactions, sales, and consents for various accounts in the pharma industry for December. Each row represents data for an account, and the columns include the date, frequency, time description, type (interaction, sales, or consent), account name, brand name, and finding.
 
 Here's a sample of the data in the table:
